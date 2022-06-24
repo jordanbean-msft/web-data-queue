@@ -3,6 +3,7 @@ variable "location" {}
 variable "resource_tags" {
   type = map(any)
 }
+variable "private_dns_zone_name" {}
 
 locals {
   vnet_name                                     = "vnet-${var.resource_tags.app}-${var.resource_tags.region}-${var.resource_tags.environment}"

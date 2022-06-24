@@ -5,11 +5,25 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["${local.vnet_address_prefix}"]
 }
 
+resource "azurerm_private_dns_zone_virtual_network_link" "vnet_link" {
+  name                  = "vnet_link"
+  resource_group_name   = var.resource_group_name
+  private_dns_zone_name = var.private_dns_zone_name
+  virtual_network_id    = azurerm_virtual_network.vnet.id
+}
+
 resource "azurerm_subnet" "app_subnet" {
   name                 = local.vnet_app_subnet_name
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [local.vnet_app_subnet_address_prefix]
+  delegation {
+    name = "appServiceDelegation"
+    service_delegation {
+      name    = "Microsoft.Web/serverFarms"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+    }
+  }
 }
 
 resource "azurerm_subnet_network_security_group_association" "app_subnet_nsg" {
@@ -22,6 +36,13 @@ resource "azurerm_subnet" "data_subnet" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [local.vnet_data_subnet_address_prefix]
+  delegation {
+    name = "managedInstanceDelegation"
+    service_delegation {
+      name    = "Microsoft.Sql/managedInstances"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action", "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action"]
+    }
+  }
 }
 
 resource "azurerm_subnet_network_security_group_association" "data_subnet_nsg" {
