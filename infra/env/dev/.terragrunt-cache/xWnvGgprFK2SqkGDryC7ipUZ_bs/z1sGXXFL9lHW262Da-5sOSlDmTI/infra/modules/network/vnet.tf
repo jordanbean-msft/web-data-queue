@@ -81,11 +81,6 @@ resource "azurerm_subnet_network_security_group_association" "data_subnet_nsg" {
   network_security_group_id = azurerm_network_security_group.data_nsg.id
 }
 
-resource "azurerm_subnet_route_table_association" "data_subnet_route_table" {
-  subnet_id      = azurerm_subnet.data_subnet.id
-  route_table_id = azurerm_route_table.data_route_table.id
-}
-
 resource "azurerm_subnet" "vpn_gateway_subnet" {
   name                 = local.vnet_vpn_gateway_subnet_name
   resource_group_name  = var.resource_group_name

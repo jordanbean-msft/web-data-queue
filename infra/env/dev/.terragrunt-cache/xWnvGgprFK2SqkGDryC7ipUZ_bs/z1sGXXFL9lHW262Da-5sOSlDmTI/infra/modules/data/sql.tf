@@ -1,5 +1,5 @@
 resource "random_password" "username" {
-  length  = 8
+  length  = 10
   special = false
 }
 

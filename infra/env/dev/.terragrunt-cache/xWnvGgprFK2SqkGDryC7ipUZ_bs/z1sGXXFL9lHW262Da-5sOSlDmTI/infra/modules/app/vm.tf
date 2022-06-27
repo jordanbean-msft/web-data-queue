@@ -29,19 +29,6 @@ resource "azurerm_windows_virtual_machine" "vm_queue" {
   admin_password = data.azurerm_key_vault_secret.vm_queue_password_secret.value
 }
 
-resource "azurerm_dev_test_global_vm_shutdown_schedule" "vm_queue_shutdown" {
-  virtual_machine_id = azurerm_windows_virtual_machine.vm_queue.id
-  location           = var.location
-  enabled            = true
-
-  daily_recurrence_time = "1800"
-  timezone              = "Central Standard Time"
-
-  notification_settings {
-    enabled = false
-  }
-}
-
 # resource "azurerm_monitor_diagnostic_setting" "vm_queue_diagnostic_settings" {
 #   name                       = "logging"
 #   target_resource_id         = azurerm_windows_web_app.admin_portal.id
