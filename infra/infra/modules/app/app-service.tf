@@ -24,7 +24,7 @@ resource "azurerm_windows_web_app" "web_portal" {
 
 resource "azurerm_app_service_virtual_network_swift_connection" "app_service_web_portal_vnet_integration" {
   app_service_id = azurerm_windows_web_app.web_portal.id
-  subnet_id      = data.azurerm_subnet.app_external_subnet.id
+  subnet_id      = data.azurerm_subnet.app_subnet.id
 }
 
 resource "azurerm_monitor_diagnostic_setting" "web_portal_diagnostic_settings" {
@@ -87,7 +87,7 @@ resource "azurerm_windows_web_app" "admin_portal" {
 
 resource "azurerm_app_service_virtual_network_swift_connection" "app_service_admin_portal_vnet_integration" {
   app_service_id = azurerm_windows_web_app.admin_portal.id
-  subnet_id      = data.azurerm_subnet.app_internal_subnet.id
+  subnet_id      = data.azurerm_subnet.app_subnet.id
 }
 
 resource "azurerm_monitor_diagnostic_setting" "admin_portal_diagnostic_settings" {

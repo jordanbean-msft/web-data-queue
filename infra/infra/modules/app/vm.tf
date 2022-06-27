@@ -4,7 +4,7 @@ resource "azurerm_network_interface" "vm_queue_nic" {
   resource_group_name = var.resource_group_name
   ip_configuration {
     name                          = "ipconfig1"
-    subnet_id                     = data.azurerm_subnet.app_queue_subnet.id
+    subnet_id                     = data.azurerm_subnet.app_subnet.id
     private_ip_address_allocation = "Dynamic"
   }
 }
@@ -27,19 +27,6 @@ resource "azurerm_windows_virtual_machine" "vm_queue" {
   }
   admin_username = data.azurerm_key_vault_secret.vm_queue_username_secret.value
   admin_password = data.azurerm_key_vault_secret.vm_queue_password_secret.value
-}
-
-resource "azurerm_dev_test_global_vm_shutdown_schedule" "vm_queue_shutdown" {
-  virtual_machine_id = azurerm_windows_virtual_machine.vm_queue.id
-  location           = var.location
-  enabled            = true
-
-  daily_recurrence_time = "1800"
-  timezone              = "Central Standard Time"
-
-  notification_settings {
-    enabled = false
-  }
 }
 
 # resource "azurerm_monitor_diagnostic_setting" "vm_queue_diagnostic_settings" {

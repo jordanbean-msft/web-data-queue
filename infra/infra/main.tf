@@ -42,9 +42,7 @@ module "app" {
   location                      = var.location
   resource_tags                 = var.resource_tags
   vnet_name                     = module.network.vnet_name
-  vnet_app_internal_subnet_name = module.network.vnet_app_internal_subnet_name
-  vnet_app_external_subnet_name = module.network.vnet_app_external_subnet_name
-  vnet_app_queue_subnet_name    = module.network.vnet_app_queue_subnet_name
+  vnet_app_subnet_name          = module.network.vnet_app_subnet_name
   log_analytics_workspace_name  = module.services.log_analytics_workspace_name
   application_insights_name     = module.services.application_insights_name
   key_vault_name                = module.services.key_vault_name
