@@ -20,8 +20,20 @@ data "azurerm_key_vault" "key_vault" {
   resource_group_name = var.resource_group_name
 }
 
-data "azurerm_subnet" "app_subnet" {
-  name                 = var.vnet_app_subnet_name
+data "azurerm_subnet" "app_internal_subnet" {
+  name                 = var.vnet_app_internal_subnet_name
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = var.vnet_name
+}
+
+data "azurerm_subnet" "app_external_subnet" {
+  name                 = var.vnet_app_external_subnet_name
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = var.vnet_name
+}
+
+data "azurerm_subnet" "app_queue_subnet" {
+  name                 = var.vnet_app_queue_subnet_name
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.vnet_name
 }

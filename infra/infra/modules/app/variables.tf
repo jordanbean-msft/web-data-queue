@@ -4,7 +4,9 @@ variable "resource_tags" {
   type = map(any)
 }
 variable "vnet_name" {}
-variable "vnet_app_subnet_name" {}
+variable "vnet_app_internal_subnet_name" {}
+variable "vnet_app_external_subnet_name" {}
+variable "vnet_app_queue_subnet_name" {}
 variable "log_analytics_workspace_name" {}
 variable "application_insights_name" {}
 variable "key_vault_name" {}
