@@ -10,6 +10,12 @@ variable "application_insights_name" {}
 variable "key_vault_name" {}
 variable "user_assigned_identity_name" {}
 variable "admin_upn" {}
+variable "sql_username_secret_name" {
+  sensitive = true
+}
+variable "sql_password_secret_name" {
+  sensitive = true
+}
 
 locals {
   storage_account_name               = lower("sa${var.resource_tags.app}${var.resource_tags.region}${var.resource_tags.environment}")

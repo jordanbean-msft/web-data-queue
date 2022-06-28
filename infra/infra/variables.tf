@@ -9,6 +9,12 @@ variable "vm_queue_username_secret_value" {
 variable "vm_queue_password_secret_value" {
   sensitive = true
 }
+variable "sql_username_secret_value" {
+  sensitive = true
+}
+variable "sql_password_secret_value" {
+  sensitive = true
+}
 variable "admin_upn" {
   sensitive = true
 }

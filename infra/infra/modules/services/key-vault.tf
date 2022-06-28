@@ -31,3 +31,15 @@ resource "azurerm_key_vault_secret" "vm_queue_password_secret" {
   value        = var.vm_queue_password_secret_value
   key_vault_id = azurerm_key_vault.key_vault.id
 }
+
+resource "azurerm_key_vault_secret" "sql_username_secret" {
+  name         = local.sql_username_secret_name
+  value        = var.sql_username_secret_value
+  key_vault_id = azurerm_key_vault.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "sql_password_secret" {
+  name         = local.sql_password_secret_name
+  value        = var.sql_password_secret_value
+  key_vault_id = azurerm_key_vault.key_vault.id
+}

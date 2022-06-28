@@ -27,6 +27,13 @@ resource "azurerm_windows_virtual_machine" "vm_queue" {
   }
   admin_username = data.azurerm_key_vault_secret.vm_queue_username_secret.value
   admin_password = data.azurerm_key_vault_secret.vm_queue_password_secret.value
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes = [
+      admin_password,
+      admin_username,
+    ]
+  }
 }
 
 resource "azurerm_dev_test_global_vm_shutdown_schedule" "vm_queue_shutdown" {

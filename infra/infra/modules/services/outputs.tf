@@ -19,3 +19,9 @@ output "vm_queue_username_secret_name" {
 output "vm_queue_password_secret_name" {
   value = azurerm_key_vault_secret.vm_queue_password_secret.name
 }
+output "sql_username_secret_name" {
+  value = azurerm_key_vault_secret.sql_username_secret.name
+}
+output "sql_password_secret_name" {
+  value = azurerm_key_vault_secret.sql_password_secret.name
+}

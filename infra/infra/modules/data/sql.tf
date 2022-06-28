@@ -1,13 +1,3 @@
-resource "random_password" "username" {
-  length  = 8
-  special = false
-}
-
-resource "random_password" "password" {
-  length  = 16
-  special = true
-}
-
 resource "azurerm_mssql_managed_instance" "managed_instance" {
   name                         = local.sql_server_name
   location                     = var.location
@@ -17,16 +7,25 @@ resource "azurerm_mssql_managed_instance" "managed_instance" {
   storage_size_in_gb           = "32"
   subnet_id                    = data.azurerm_subnet.data_subnet.id
   vcores                       = 4
-  administrator_login          = random_password.username.result
-  administrator_login_password = random_password.password.result
+  administrator_login          = data.azurerm_key_vault_secret.sql_username_secret.value
+  administrator_login_password = data.azurerm_key_vault_secret.sql_password_secret.value
+  storage_account_type         = "LRS"
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes = [
+      subnet_id,
+      administrator_login,
+      administrator_login_password
+    ]
+  }
 }
 
-resource "azurerm_mssql_managed_instance_active_directory_administrator" "managed_instance_aad_administrator" {
-  managed_instance_id = azurerm_mssql_managed_instance.managed_instance.id
-  login_username      = data.azuread_user.admin.user_principal_name
-  object_id           = data.azuread_user.admin.object_id
-  tenant_id           = data.azurerm_client_config.current.tenant_id
-}
+# resource "azurerm_mssql_managed_instance_active_directory_administrator" "managed_instance_aad_administrator" {
+#   managed_instance_id = azurerm_mssql_managed_instance.managed_instance.id
+#   login_username      = data.azuread_user.admin.user_principal_name
+#   object_id           = data.azuread_user.admin.object_id
+#   tenant_id           = data.azurerm_client_config.current.tenant_id
+# }
 
 resource "azurerm_monitor_diagnostic_setting" "managed_instance_diagnostic_settings" {
   name                       = "logging"

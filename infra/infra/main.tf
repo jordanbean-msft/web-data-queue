@@ -19,6 +19,8 @@ module "services" {
   vm_queue_username_secret_value = var.vm_queue_username_secret_value
   vm_queue_password_secret_value = var.vm_queue_password_secret_value
   admin_upn                      = var.admin_upn
+  sql_username_secret_value      = var.sql_username_secret_value
+  sql_password_secret_value      = var.sql_password_secret_value
 }
 
 module "network" {
@@ -52,6 +54,8 @@ module "app" {
   user_assigned_identity_name   = module.services.user_assigned_identity_name
   vm_queue_username_secret_name = module.services.vm_queue_username_secret_name
   vm_queue_password_secret_name = module.services.vm_queue_password_secret_name
+  sql_username_secret_name      = module.services.sql_username_secret_name
+  sql_password_secret_name      = module.services.sql_password_secret_name
 }
 
 module "data" {
@@ -70,4 +74,6 @@ module "data" {
   key_vault_name               = module.services.key_vault_name
   user_assigned_identity_name  = module.services.user_assigned_identity_name
   admin_upn                    = var.admin_upn
+  sql_username_secret_name     = module.services.sql_username_secret_name
+  sql_password_secret_name     = module.services.sql_password_secret_name
 }

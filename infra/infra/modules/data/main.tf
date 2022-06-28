@@ -20,6 +20,17 @@ data "azurerm_key_vault" "key_vault" {
   resource_group_name = var.resource_group_name
 }
 
+data "azurerm_key_vault_secret" "sql_username_secret" {
+  name         = var.sql_username_secret_name
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+data "azurerm_key_vault_secret" "sql_password_secret" {
+  name         = var.sql_password_secret_name
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+
 data "azurerm_subnet" "data_subnet" {
   name                 = var.vnet_data_subnet_name
   resource_group_name  = var.resource_group_name
