@@ -1,5 +1,9 @@
 variable "resource_group_name" {}
 variable "location" {}
+variable "subscription_id" {}
+variable "app" {}
+variable "region" {}
+variable "environment" {}
 variable "resource_tags" {
   type = map(any)
 }

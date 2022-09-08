@@ -1,5 +1,8 @@
 variable "resource_group_name" {}
 variable "location" {}
+variable "app" {}
+variable "region" {}
+variable "environment" {}
 variable "resource_tags" {
   type = map(any)
 }
@@ -26,10 +29,10 @@ variable "sql_password_secret_name" {
 }
 
 locals {
-  app_service_plan_internal_name = "asp-internal-${var.resource_tags.app}-${var.resource_tags.region}-${var.resource_tags.environment}"
-  app_service_plan_external_name = "asp-external-${var.resource_tags.app}-${var.resource_tags.region}-${var.resource_tags.environment}"
-  app_service_web_portal_name    = "wa-webPortal-${var.resource_tags.app}-${var.resource_tags.region}-${var.resource_tags.environment}"
-  app_service_admin_portal_name  = "wa-adminPortal-${var.resource_tags.app}-${var.resource_tags.region}-${var.resource_tags.environment}"
+  app_service_plan_internal_name = "asp-internal-${var.app}-${var.region}-${var.environment}"
+  app_service_plan_external_name = "asp-external-${var.app}-${var.region}-${var.environment}"
+  app_service_web_portal_name    = "wa-webPortal-${var.app}-${var.region}-${var.environment}"
+  app_service_admin_portal_name  = "wa-adminPortal-${var.app}-${var.region}-${var.environment}"
   vm_queue_name                  = "vmQueue"
-  vm_queue_nic_name              = "nic-vmQueue-${var.resource_tags.app}${var.resource_tags.region}${var.resource_tags.environment}"
+  vm_queue_nic_name              = "nic-vmQueue-${var.app}${var.region}${var.environment}"
 }
