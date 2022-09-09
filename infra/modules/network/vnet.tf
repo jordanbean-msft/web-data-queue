@@ -100,6 +100,13 @@ resource "azurerm_subnet" "build_subnet" {
   address_prefixes     = [local.vnet_build_subnet_address_prefix]
 }
 
+resource "azurerm_subnet" "api_management_subnet" {
+  name                 = local.vnet_api_management_subnet_name
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = [local.vnet_api_management_subnet_address_prefix]
+}
+
 resource "azurerm_subnet_network_security_group_association" "build_subnet_nsg" {
   subnet_id                 = azurerm_subnet.build_subnet.id
   network_security_group_id = azurerm_network_security_group.build_nsg.id

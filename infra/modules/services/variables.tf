@@ -25,8 +25,8 @@ variable "admin_upn" {
 locals {
   log_analytics_workspace_name  = "la-${var.app}-${var.region}-${var.environment}"
   application_insights_name     = "ai-${var.app}-${var.region}-${var.environment}"
-  key_vault_name                = "kv-${var.app}-${var.environment}"
-  private_dns_zone_name         = "${var.environment}.${var.region}.${var.app}"
+  key_vault_name                = "kv-${var.app}${var.environment}-01"
+  private_dns_zone_name         = "${var.environment}.${var.app}.com"
   user_assigned_identity_name   = "mi-${var.app}-${var.region}-${var.environment}"
   vm_queue_username_secret_name = "vmQueue${var.app}${var.region}${var.environment}-username"
   vm_queue_password_secret_name = "vmQueue${var.app}${var.region}${var.environment}-password"

@@ -27,6 +27,12 @@ variable "sql_username_secret_name" {
 variable "sql_password_secret_name" {
   sensitive = true
 }
+variable "api_management_publisher_email" {}
+variable "api_management_sku" {}
+variable "app_service_plan_sku" {}
+variable "vnet_api_management_subnet_name" {}
+
+variable "api_management_publisher_name" {}
 
 locals {
   app_service_plan_internal_name = "asp-internal-${var.app}-${var.region}-${var.environment}"
@@ -35,4 +41,5 @@ locals {
   app_service_admin_portal_name  = "wa-adminPortal-${var.app}-${var.region}-${var.environment}"
   vm_queue_name                  = "vmQueue"
   vm_queue_nic_name              = "nic-vmQueue-${var.app}${var.region}${var.environment}"
+  api_management_name            = "apim-${var.app}-${var.region}-${var.environment}"
 }

@@ -25,3 +25,7 @@ output "vnet_vpn_gateway_subnet_name" {
 output "vnet_build_subnet_name" {
   value = azurerm_subnet.build_subnet.name
 }
+
+output "vnet_api_management_subnet_name" {
+  value = azurerm_subnet.api_management_subnet.name
+}

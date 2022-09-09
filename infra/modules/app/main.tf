@@ -47,3 +47,9 @@ data "azurerm_key_vault_secret" "vm_queue_password_secret" {
   name         = var.vm_queue_password_secret_name
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
+
+data "azurerm_subnet" "vnet_api_management_subnet" {
+  name                 = var.vnet_api_management_subnet_name
+  virtual_network_name = var.vnet_name
+  resource_group_name  = var.resource_group_name
+}

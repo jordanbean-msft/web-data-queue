@@ -22,3 +22,8 @@ variable "sql_password_secret_value" {
 variable "admin_upn" {
   sensitive = true
 }
+variable "app_service_plan_sku" {}
+variable "vpn_gateway_client_configuration_address_space" {}
+variable "api_management_sku" {}
+variable "api_management_publisher_name" {}
+variable "api_management_publisher_email" {}

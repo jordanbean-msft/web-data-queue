@@ -25,6 +25,8 @@ locals {
   vnet_vpn_gateway_subnet_address_prefix        = "10.0.2.0/27"
   vnet_build_subnet_name                        = "build"
   vnet_build_subnet_address_prefix              = "10.0.3.0/27"
+  vnet_api_management_subnet_name               = "api-management"
+  vnet_api_management_subnet_address_prefix     = "10.0.4.0/27"
   vnet_build_subnet_network_security_group_name = "nsg-build-${var.app}-${var.region}-${var.environment}"
   vnet_data_subnet_route_table                  = "rt-data-${var.app}-${var.region}-${var.environment}"
 }
