@@ -21,7 +21,7 @@ variable "sql_password_secret_name" {
 }
 
 locals {
-  storage_account_name               = lower("sa${var.app}${var.region}${var.environment}")
+  storage_account_name               = lower("samaps${var.app}${var.environment}")
   storage_account_img_container_name = "img"
   sql_server_name                    = lower("sqls-${var.app}-${var.region}-${var.environment}")
   sql_web_portal_db_name             = "sqldb-webPortal-${var.app}-${var.region}-${var.environment}"
