@@ -14,7 +14,7 @@ stages:
     jobs:
     - deployment: Dev_Deploy
       pool:
-        name: 'windows-latest'
+        vmImage: 'windows-latest'
       environment: ${{ variables.devEnvironmentName }}
       variables:
         - name: ARM_SUBSCRIPTION_ID
