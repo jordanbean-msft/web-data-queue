@@ -12,12 +12,12 @@ steps:
   - checkout: self
     persistCredentials: true
   - template: ../printEnv.yml
-  - task: TerraformInstaller@0
+  - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
     displayName: Install Terraform
     inputs:
       terraformVersion: latest
   - script: cd ${{ parameters.pathToTerraformDirectory }}
-  - task: TerraformCLI
+  - task: TerraformCLI@0
     displayName: 'terraform init'
     inputs:
       command: init
@@ -27,7 +27,7 @@ steps:
       backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName}}
       backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
       backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
-  - task: TerraformCLI
+  - task: TerraformCLI@0
     displayName: 'terraform validate'
     inputs:
       command: validate
