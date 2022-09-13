@@ -5,7 +5,7 @@ variables:
   - template: variables.yml
     parameters:
       adoScriptDirectoryName: ${{ variables.adoScriptDirectoryName }}
-      terraformDirectoryName: ${{ variables.terraformDirectoryName }}
+      infrastructureDirectoryName: ${{ variables.infrastructureDirectoryName }}
       terraformEnvironmentVariablesDirectoryName: ${{ variables.terraformEnvironmentVariablesDirectoryName }}
 trigger:
   - main
