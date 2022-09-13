@@ -40,7 +40,7 @@ steps:
       command: plan
       environmentServiceName: ${{ parameters.serviceConnectionName }}
       publishPlanResults: 'my_plan_name'
-      commandOptions: '-out=terraform.tfplan -detailed-exitcode' 
+      commandOptions: '-out=terraform.tfplan -detailed-exitcode -var-file=${{ parameters.pathToTerraformEnvironmentVariablesDirectory }}/${{ parameters.environmentName }}.tfvars' 
   - task: ManualValidation@0
     timeoutInMinutes: 1440 # task times out in 1 day
     inputs:
@@ -53,4 +53,4 @@ steps:
     inputs:
       command: apply
       environmentServiceName: ${{ parameters.serviceConnectionName }}
-      commandOptions: terraform.tfplan
+      commandOptions: '-out=terraform.tfplan -var-file=${{ parameters.pathToTerraformEnvironmentVariablesDirectory }}/${{ parameters.environmentName }}.tfvars'
