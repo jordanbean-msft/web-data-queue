@@ -64,6 +64,7 @@ module "ingress" {
   vnet_name                                      = module.network.vnet_name
   vnet_vpn_gateway_subnet_name                   = module.network.vnet_vpn_gateway_subnet_name
   vpn_gateway_client_configuration_address_space = var.vpn_gateway_client_configuration_address_space
+  vnet_bastion_subnet_name                       = module.network.vnet_bastion_subnet_name
 }
 
 module "app" {

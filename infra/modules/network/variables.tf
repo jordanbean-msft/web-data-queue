@@ -29,4 +29,7 @@ locals {
   vnet_api_management_subnet_address_prefix     = "10.0.4.0/27"
   vnet_build_subnet_network_security_group_name = "nsg-build-${var.app}-${var.region}-${var.environment}"
   vnet_data_subnet_route_table                  = "rt-data-${var.app}-${var.region}-${var.environment}"
+  vnet_bastion_subnet_address_prefix            = "10.0.5.0/27"
+  vnet_bastion_vm_subnet_name                   = "bastion-vm"
+  vnet_bastion_vm_subnet_address_prefix         = "10.0.6.0/29"
 }

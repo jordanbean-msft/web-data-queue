@@ -111,3 +111,17 @@ resource "azurerm_subnet_network_security_group_association" "build_subnet_nsg" 
   subnet_id                 = azurerm_subnet.build_subnet.id
   network_security_group_id = azurerm_network_security_group.build_nsg.id
 }
+
+resource "azurerm_subnet" "bastion_subnet" {
+  name                 = "AzureBastionSubnet"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = [local.vnet_bastion_subnet_address_prefix]
+}
+
+resource "azurerm_subnet" "bastion_vm_subnet" {
+  name                 = local.vnet_bastion_vm_subnet_name
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = [local.vnet_bastion_vm_subnet_address_prefix]
+}

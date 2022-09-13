@@ -29,3 +29,11 @@ output "vnet_build_subnet_name" {
 output "vnet_api_management_subnet_name" {
   value = azurerm_subnet.api_management_subnet.name
 }
+
+output "vnet_bastion_subnet_name" {
+  value = azurerm_subnet.bastion_subnet.name
+}
+
+output "vnet_bastion_vm_subnet_name" {
+  value = azurerm_subnet.bastion_vm_subnet.name
+}
