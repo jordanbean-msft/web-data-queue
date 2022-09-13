@@ -4,5 +4,5 @@ parameters:
   - name: terraformEnvironmentVariablesDirectoryName
 
 variables:
-  pathToTerraformEnvironmentVariablesDirectory: $(System.DefaultWorkingDirectory)/${{ parameters.terraformDirectoryName }}/${{ parameters.terraformEnvironmentVariablesDirectoryName }}
+  pathToTerraformEnvironmentVariablesDirectory: $(System.DefaultWorkingDirectory)/infra/${{ parameters.terraformDirectoryName }}/${{ parameters.terraformEnvironmentVariablesDirectoryName }}
   pathToAdoScriptDirectory: $(System.DefaultWorkingDirectory)/${{ parameters.adoScriptDirectoryName }}
