@@ -16,7 +16,6 @@ steps:
     displayName: Install Terraform
     inputs:
       terraformVersion: latest
-  - script: cd ${{ parameters.pathToInfrastructureDirectory }}
   - task: TerraformCLI@0
     displayName: 'terraform init'
     inputs:
@@ -27,11 +26,13 @@ steps:
       backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName}}
       backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
       backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
+      workingDirectory: ${{ parameters.pathToInfrastructureDirectory }}
   - task: TerraformCLI@0
     displayName: 'terraform validate'
     inputs:
       command: validate
       environmentServiceName: ${{ parameters.serviceConnectionName }}
+      workingDirectory: ${{ parameters.pathToInfrastructureDirectory }}
   - task: TerraformCLI@0
     displayName: 'terraform plan'
     inputs:
@@ -39,6 +40,7 @@ steps:
       environmentServiceName: ${{ parameters.serviceConnectionName }}
       publishPlanResults: 'my_plan_name'
       commandOptions: '-out=terraform.tfplan -detailed-exitcode -var-file=${{ parameters.pathToTerraformEnvironmentVariablesDirectory }}/${{ parameters.environmentName }}.tfvars' 
+      workingDirectory: ${{ parameters.pathToInfrastructureDirectory }}
   # - task: TerraformCLI@0
   #   displayName: 'terraform apply'
   #   condition: and(succeeded(), eq(variables['TERRAFORM_PLAN_HAS_CHANGES'], 'true'))
@@ -46,3 +48,4 @@ steps:
   #     command: apply
   #     environmentServiceName: ${{ parameters.serviceConnectionName }}
   #     commandOptions: '-out=terraform.tfplan -var-file=${{ parameters.pathToTerraformEnvironmentVariablesDirectory }}/${{ parameters.environmentName }}.tfvars'
+  #     workingDirectory: ${{ parameters.pathToInfrastructureDirectory }}
