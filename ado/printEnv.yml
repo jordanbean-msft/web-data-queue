@@ -1,5 +1,5 @@
 steps:
-  - bash: env | sort
+  - pwsh: gci env:* | sort-object name
     displayName: Print environment variables      
-  - bash: tree
+  - pwsh: tree /F
     displayName: Print directory tree
