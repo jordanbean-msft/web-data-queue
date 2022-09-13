@@ -1,6 +1,6 @@
 parameters:
   - name: environmentName
-  - name: pathToTerraformDirectory
+  - name: pathToInfrastructureDirectory
   - name: pathToTerraformEnvironmentVariablesDirectory
   - name: backendAzureRmResourceGroupName
   - name: backendAzureRmStorageAccountName
@@ -16,7 +16,7 @@ steps:
     displayName: Install Terraform
     inputs:
       terraformVersion: latest
-  - script: cd ${{ parameters.pathToTerraformDirectory }}
+  - script: cd ${{ parameters.pathToInfrastructureDirectory }}
   - task: TerraformCLI@0
     displayName: 'terraform init'
     inputs:
@@ -39,10 +39,10 @@ steps:
       environmentServiceName: ${{ parameters.serviceConnectionName }}
       publishPlanResults: 'my_plan_name'
       commandOptions: '-out=terraform.tfplan -detailed-exitcode -var-file=${{ parameters.pathToTerraformEnvironmentVariablesDirectory }}/${{ parameters.environmentName }}.tfvars' 
-  - task: TerraformCLI@0
-    displayName: 'terraform apply'
-    condition: and(succeeded(), eq(variables['TERRAFORM_PLAN_HAS_CHANGES'], 'true'))
-    inputs:
-      command: apply
-      environmentServiceName: ${{ parameters.serviceConnectionName }}
-      commandOptions: '-out=terraform.tfplan -var-file=${{ parameters.pathToTerraformEnvironmentVariablesDirectory }}/${{ parameters.environmentName }}.tfvars'
+  # - task: TerraformCLI@0
+  #   displayName: 'terraform apply'
+  #   condition: and(succeeded(), eq(variables['TERRAFORM_PLAN_HAS_CHANGES'], 'true'))
+  #   inputs:
+  #     command: apply
+  #     environmentServiceName: ${{ parameters.serviceConnectionName }}
+  #     commandOptions: '-out=terraform.tfplan -var-file=${{ parameters.pathToTerraformEnvironmentVariablesDirectory }}/${{ parameters.environmentName }}.tfvars'

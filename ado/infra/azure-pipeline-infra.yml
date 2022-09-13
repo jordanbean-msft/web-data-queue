@@ -28,7 +28,7 @@ stages:
             - template: deploy-terraform.yml
               parameters:
                 environmentName: ${{ variables.devEnvironmentName }}
-                pathToTerraformDirectory: ${{ variables.pathToTerraformWebAppDirectory }}
+                pathToInfrastructureDirectory: ${{ variables.pathtoInfrastructureDirectory }}
                 pathToTerraformEnvironmentVariablesDirectory: ${{ variables.pathToTerraformEnvironmentVariablesDirectory }}
                 serviceConnectionName: ${{ variables.serviceConnectionName }}
                 backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
