@@ -1,0 +1,14 @@
+parameters:
+  - name: appServiceName
+  - name: artifactName
+  - name: serviceConnectionName 
+
+steps:
+  - task: AzureWebApp@1
+    displayName: Deploy WebApp
+    inputs:
+      azureSubscription: ${{ parameters.serviceConnectionName }}
+      appName: ${{ parameters.appServiceName }}
+      package: ${{ parameters.artifactName }}
+      enableCustomDeployment: true
+      deploymentMethod: runFromPackage

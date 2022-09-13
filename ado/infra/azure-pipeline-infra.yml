@@ -1,0 +1,39 @@
+name: WebApp 
+variables:
+  - template: env/global.yml
+  - template: env/dev.yml
+  - template: variables.yml
+    parameters:
+      adoScriptDirectoryName: ${{ variables.adoScriptDirectoryName }}
+      terraformDirectoryName: ${{ variables.terraformDirectoryName }}
+      terraformEnvironmentVariablesDirectoryName: ${{ variables.terraformEnvironmentVariablesDirectoryName }}
+trigger:
+  - main
+stages:
+  - stage: Dev
+    jobs:
+    - deployment: Dev_Deploy
+      pool:
+        name: 'windows-latest'
+      environment: ${{ variables.devEnvironmentName }}
+      variables:
+        - name: ARM_SUBSCRIPTION_ID
+          value: ${{ variables.subscriptionId }}
+        - name: ARM_TENANT_ID
+          value: ${{ variables.tenantId }}
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - template: deploy-terraform.yml
+              parameters:
+                artifactName: ${{ variables.artifactName }}
+                environmentName: ${{ variables.devEnvironmentName }}
+                pathToAdoScriptDirectory: ${{ variables.pathToAdoScriptDirectory }}
+                pathToTerraformDirectory: ${{ variables.pathToTerraformWebAppDirectory }}
+                pathToTerraformEnvironmentVariablesDirectory: ${{ variables.pathToTerraformEnvironmentVariablesDirectory }}
+                serviceConnectionName: ${{ variables.serviceConnectionName }}
+                backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
+                backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
+                backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
+                backendAzureRmKey: ${{ variables.backendAzureRmKey }}

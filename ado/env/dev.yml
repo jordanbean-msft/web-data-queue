@@ -1,0 +1,8 @@
+variables:
+  devEnvironmentName: dev
+  devResourceGroupName: rg-webDataQueue-ussc-dev
+  backendAzureRmContainerName: tfstate
+  backendAzureRmResourceGroupName: rg-webDataQueue-ussc-dev
+  backendAzureRmStorageAccountName: sawebdataqueuetfstate
+  backendAzureRmKey: terraform.tfstate
+  serviceConnectionName: rg-webDataQueue-ussc-dev

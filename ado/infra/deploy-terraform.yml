@@ -1,0 +1,56 @@
+parameters:
+  - name: environmentName
+  - name: pathToTerraformDirectory
+  - name: pathToTerraformEnvironmentVariablesDirectory
+  - name: backendAzureRmResourceGroupName
+  - name: backendAzureRmStorageAccountName
+  - name: serviceConnectionName
+  - name: backendAzureRmContainerName
+  - name: backendAzureRmKey
+  
+steps:
+  - checkout: self
+    persistCredentials: true
+  - template: printEnv.yml
+  - task: TerraformInstaller@0
+    displayName: Install Terraform
+    inputs:
+      terraformVersion: latest
+  - task: TerraformCLI
+    displayName: 'terraform init'
+    workingDirectory: ${{ parameters.pathToTerraformDirectory }}
+    inputs:
+      command: init
+      backendType: azurerm
+      backendServiceArm: ${{ parameters.serviceConnectionName }} 
+      backendAzureRmResourceGroupName: ${{ parameters.backendAzureRmResourceGroupName }}
+      backendAzureRmStorageAccountName: ${{ parameters.backendAzureRmStorageAccountName}}
+      backendAzureRmContainerName: ${{ parameters.backendAzureRmContainerName }}
+      backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
+  - task: TerraformCLI
+    displayName: 'terraform validate'
+    workingDirectory: ${{ parameters.pathToTerraformDirectory }}
+    inputs:
+      command: validate
+      environmentServiceName: ${{ parameters.serviceConnectionName }}
+  - task: TerraformCLI@0
+    displayName: 'terraform plan'
+    workingDirectory: ${{ parameters.pathToTerraformDirectory }}
+    inputs:
+      command: plan
+      environmentServiceName: ${{ parameters.serviceConnectionName }}
+      publishPlanResults: 'my_plan_name'
+      commandOptions: '-out=terraform.tfplan -detailed-exitcode' 
+  - task: ManualValidation@0
+    timeoutInMinutes: 1440 # task times out in 1 day
+    inputs:
+      instructions: 'Please validate the deployment and resume'
+      onTimeout: reject
+  - task: TerraformCLI@0
+    displayName: 'terraform apply'
+    condition: and(succeeded(), eq(variables['TERRAFORM_PLAN_HAS_CHANGES'], 'true'))
+    workingDirectory: ${{ parameters.pathToTerraformDirectory }}
+    inputs:
+      command: apply
+      environmentServiceName: ${{ parameters.serviceConnectionName }}
+      commandOptions: terraform.tfplan
