@@ -16,9 +16,9 @@ steps:
     displayName: Install Terraform
     inputs:
       terraformVersion: latest
+  - script: cd ${{ parameters.pathToTerraformDirectory }}
   - task: TerraformCLI
     displayName: 'terraform init'
-    workingDirectory: ${{ parameters.pathToTerraformDirectory }}
     inputs:
       command: init
       backendType: azurerm
@@ -29,13 +29,11 @@ steps:
       backendAzureRmKey: ${{ parameters.backendAzureRmKey }}
   - task: TerraformCLI
     displayName: 'terraform validate'
-    workingDirectory: ${{ parameters.pathToTerraformDirectory }}
     inputs:
       command: validate
       environmentServiceName: ${{ parameters.serviceConnectionName }}
   - task: TerraformCLI@0
     displayName: 'terraform plan'
-    workingDirectory: ${{ parameters.pathToTerraformDirectory }}
     inputs:
       command: plan
       environmentServiceName: ${{ parameters.serviceConnectionName }}
@@ -49,7 +47,6 @@ steps:
   - task: TerraformCLI@0
     displayName: 'terraform apply'
     condition: and(succeeded(), eq(variables['TERRAFORM_PLAN_HAS_CHANGES'], 'true'))
-    workingDirectory: ${{ parameters.pathToTerraformDirectory }}
     inputs:
       command: apply
       environmentServiceName: ${{ parameters.serviceConnectionName }}
