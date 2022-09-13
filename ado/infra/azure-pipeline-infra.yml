@@ -27,9 +27,7 @@ stages:
             steps:
             - template: deploy-terraform.yml
               parameters:
-                artifactName: ${{ variables.artifactName }}
                 environmentName: ${{ variables.devEnvironmentName }}
-                pathToAdoScriptDirectory: ${{ variables.pathToAdoScriptDirectory }}
                 pathToTerraformDirectory: ${{ variables.pathToTerraformWebAppDirectory }}
                 pathToTerraformEnvironmentVariablesDirectory: ${{ variables.pathToTerraformEnvironmentVariablesDirectory }}
                 serviceConnectionName: ${{ variables.serviceConnectionName }}
