@@ -16,6 +16,7 @@ resource "azurerm_windows_web_app" "web_portal" {
     "XDT_MicrosoftApplicationInsights_Mode"      = "Recommended"
     "MESSAGE"                                    = "Bears, beets, battlestar galactica"
     "SQL_DATABASE_USERNAME"                      = "@Microsoft.KeyVault(VaultName=${var.key_vault_name};SecretName=${var.sql_username_secret_name})"
+    "WEBSITE_RUN_FROM_PACKAGE"                   = "1"
   }
   key_vault_reference_identity_id = data.azurerm_user_assigned_identity.user_assigned_identity.id
   identity {
