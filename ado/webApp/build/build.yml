@@ -17,7 +17,8 @@ steps:
   - task: ArchiveFiles@2
     inputs:
       rootFolderOrFile: ${{ parameters.pathToWebAppProjectDirectory }}/bin
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
-      verbose: 
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      includeRootFolder: false
+      verbose: true
   - publish: $(Build.ArtifactStagingDirectory)
     artifact: $(Build.BuildId).zip
