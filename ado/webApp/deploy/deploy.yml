@@ -1,13 +1,13 @@
 parameters:
   - name: appServiceName
   - name: artifactName
-  - name: serviceConnectionName
+  - name: devServiceConnectionName
 
 steps:
   - task: AzureWebApp@1
     displayName: Deploy WebApp
     inputs:
-      azureSubscription: ${{ parameters.serviceConnectionName }}
+      azureSubscription: ${{ parameters.devServiceConnectionName }}
       appName: ${{ parameters.appServiceName }}
       package: ${{ parameters.artifactName }}
       appType: webApp

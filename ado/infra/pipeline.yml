@@ -30,8 +30,8 @@ stages:
                 environmentName: ${{ variables.devEnvironmentName }}
                 pathToInfrastructureDirectory: ${{ variables.pathtoInfrastructureDirectory }}
                 pathToTerraformEnvironmentVariablesDirectory: ${{ variables.pathToTerraformEnvironmentVariablesDirectory }}
-                serviceConnectionName: ${{ variables.serviceConnectionName }}
-                backendAzureRmResourceGroupName: ${{ variables.backendAzureRmResourceGroupName }}
-                backendAzureRmStorageAccountName: ${{ variables.backendAzureRmStorageAccountName }}
-                backendAzureRmContainerName: ${{ variables.backendAzureRmContainerName }}
-                backendAzureRmKey: ${{ variables.backendAzureRmKey }}
+                devServiceConnectionName: ${{ variables.devServiceConnectionName }}
+                devBackendAzureRmResourceGroupName: ${{ variables.devBackendAzureRmResourceGroupName }}
+                devBackendAzureRmStorageAccountName: ${{ variables.devBackendAzureRmStorageAccountName }}
+                devBackendAzureRmContainerName: ${{ variables.devBackendAzureRmContainerName }}
+                devBackendAzureRmKey: ${{ variables.devBackendAzureRmKey }}
