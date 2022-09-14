@@ -36,7 +36,3 @@ data "azurerm_subnet" "data_subnet" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.vnet_name
 }
-
-data "azuread_user" "admin" {
-  user_principal_name = var.admin_upn
-}
