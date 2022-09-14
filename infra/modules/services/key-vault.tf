@@ -20,6 +20,13 @@ resource "azurerm_key_vault_access_policy" "admin_upn_access_policy" {
   secret_permissions = ["Get", "List", "Set", "Delete", "Purge", "Recover", "Restore", "Backup"]
 }
 
+resource "azurerm_key_vault_access_policy" "pipeline_access_policy" {
+  key_vault_id       = azurerm_key_vault.key_vault.id
+  tenant_id          = data.azurerm_client_config.current.tenant_id
+  object_id          = data.azurerm_client_config.current.object_id
+  secret_permissions = ["Get", "List"]
+}
+
 resource "azurerm_key_vault_secret" "vm_queue_username_secret" {
   name         = local.vm_queue_username_secret_name
   value        = var.vm_queue_username_secret_value
