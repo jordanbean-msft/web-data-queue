@@ -10,6 +10,6 @@ steps:
     inputs:
       azureSubscription: ${{ parameters.devServiceConnectionName }}
       appName: ${{ parameters.appServiceName }}
-      package: $(Pipeline.Workspace)/${{ parameters.webAppBuildPipelineLabel }}/*.zip
+      package: $(Pipeline.Workspace)/${{ parameters.webAppBuildPipelineLabel }}/${{ parameters.artifactName}}/*.zip
       appType: webApp
       deploymentMethod: runFromPackage
