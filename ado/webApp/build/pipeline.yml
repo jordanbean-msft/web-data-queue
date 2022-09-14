@@ -17,7 +17,6 @@ stages:
         steps:
           - template: build.yml
             parameters:
-              artifactName: ${{ variables.artifactName }}
               configuration: ${{ variables.configuration }}
               pathToWebAppProjectDirectory: ${{ variables.pathToWebAppProjectDirectory }}
               webAppProjectName: ${{ variables.webAppProjectName }}
