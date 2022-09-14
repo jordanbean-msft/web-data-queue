@@ -1,12 +1,15 @@
-name: Deploy WebApp 
+name: deploy-webapp
 variables:
   - template: ../../env/global.yml
   - template: ../../env/dev.yml
 trigger:
   - main
+resources:
+  pipelines:
+  - pipeline:
+    source: build-webapp
 stages:
   - stage: Dev
-    dependsOn: Build
     jobs:
     - deployment: Dev_Deploy
       pool:
