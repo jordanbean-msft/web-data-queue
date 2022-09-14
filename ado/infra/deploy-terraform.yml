@@ -47,5 +47,5 @@ steps:
     inputs:
       command: apply
       environmentServiceName: ${{ parameters.serviceConnectionName }}
-      commandOptions: 'terraform.tfplan -var-file=${{ parameters.pathToTerraformEnvironmentVariablesDirectory }}/${{ parameters.environmentName }}.tfvars -var="vm_queue_username_secret_value=$(vm_queue_username_secret_value)" -var="vm_queue_password_secret_value=$(vm_queue_password_secret_value)" -var="sql_username_secret_value=$(sql_username_secret_value)" -var="sql_password_secret_value=$(sql_password_secret_value)"' 
+      commandOptions: 'terraform.tfplan' 
       workingDirectory: ${{ parameters.pathToInfrastructureDirectory }}
