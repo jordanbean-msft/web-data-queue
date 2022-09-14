@@ -7,7 +7,7 @@ trigger:
 resources:
   pipelines:
   - pipeline: build-webapp
-    source: build-webapp
+    source: ${{ variables.webAppBuildPipelineLabel }}
 stages:
   - stage: Dev
     jobs:
@@ -24,3 +24,4 @@ stages:
                 artifactName: ${{ variables.artifactName }}
                 devServiceConnectionName: ${{ variables.devServiceConnectionName }}
                 appServiceName: ${{ variables.devAppServiceName }}
+                webAppBuildPipelineLabel: ${{ variables.webAppBuildPipelineLabel }}

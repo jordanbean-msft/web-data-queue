@@ -10,3 +10,4 @@ variables:
   webAppSQLMigrationScriptDirectoryName: SQL
   webAppSolutionName: WebApplication1
   infrastructureDirectoryName: infra
+  webAppBuildPipelineLabel: build-webapp

@@ -2,6 +2,7 @@ parameters:
   - name: appServiceName
   - name: artifactName
   - name: devServiceConnectionName
+  - name: webAppBuildPipelineLabel
 
 steps:
   - task: AzureWebApp@1
@@ -9,6 +10,6 @@ steps:
     inputs:
       azureSubscription: ${{ parameters.devServiceConnectionName }}
       appName: ${{ parameters.appServiceName }}
-      package: $(Pipeline.Workspace)/${{ parameters.artifactName }}.zip
+      package: $(Pipeline.Workspace)/${{ parameters.webAppBuildPipelineLabel }}/*.zip
       appType: webApp
       deploymentMethod: runFromPackage
