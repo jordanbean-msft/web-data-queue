@@ -21,4 +21,4 @@ steps:
       includeRootFolder: false
       verbose: true
   - publish: $(Build.ArtifactStagingDirectory)
-    artifact: $(Build.BuildId).zip
+    artifact: $(Build.BuildId)
