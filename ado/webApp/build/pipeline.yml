@@ -1,4 +1,4 @@
-name: WebApp 
+name: Build WebApp 
 variables:
   - template: ../../env/global.yml
   - template: ../../env/dev.yml

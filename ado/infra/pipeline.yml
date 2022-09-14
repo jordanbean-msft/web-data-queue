@@ -1,4 +1,4 @@
-name: WebApp 
+name: Deploy Infrastructure 
 variables:
   - template: ../env/global.yml
   - template: ../env/dev.yml

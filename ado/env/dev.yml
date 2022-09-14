@@ -6,3 +6,4 @@ variables:
   backendAzureRmStorageAccountName: sawebdataqueuetfstate
   backendAzureRmKey: terraform.tfstate
   serviceConnectionName: rg-webDataQueue-ussc-dev
+  devAppServiceName: wa-webPortal-webDataQueue-ussc-dev
