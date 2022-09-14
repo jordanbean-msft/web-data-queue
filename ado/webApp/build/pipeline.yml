@@ -20,3 +20,4 @@ stages:
               configuration: ${{ variables.configuration }}
               pathToWebAppProjectDirectory: ${{ variables.pathToWebAppProjectDirectory }}
               webAppProjectName: ${{ variables.webAppProjectName }}
+              artifactName: ${{ variables.artifactName }}

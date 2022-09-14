@@ -2,6 +2,7 @@ parameters:
  - name: configuration
  - name: pathToWebAppProjectDirectory
  - name: webAppProjectName
+ - name: artifactName
 
 steps:
   - template: ../../printEnv.yml
@@ -21,4 +22,4 @@ steps:
       includeRootFolder: false
       verbose: true
   - publish: $(Build.ArtifactStagingDirectory)
-    artifact: $(Build.BuildId)
+    artifact: ${{ parameters.artifactName }}
