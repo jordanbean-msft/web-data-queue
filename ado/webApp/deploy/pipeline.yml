@@ -6,7 +6,7 @@ trigger:
   - main
 resources:
   pipelines:
-  - pipeline:
+  - pipeline: build-webapp
     source: build-webapp
 stages:
   - stage: Dev
