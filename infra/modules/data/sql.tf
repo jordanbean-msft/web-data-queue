@@ -11,11 +11,12 @@ resource "azurerm_mssql_managed_instance" "managed_instance" {
   administrator_login_password = data.azurerm_key_vault_secret.sql_password_secret.value
   storage_account_type         = "LRS"
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false //true
     ignore_changes = [
       subnet_id,
       administrator_login,
-      administrator_login_password
+      administrator_login_password,
+      identity
     ]
   }
 }
@@ -40,6 +41,9 @@ resource "azurerm_monitor_diagnostic_setting" "managed_instance_diagnostic_setti
 resource "azurerm_mssql_managed_database" "web_portal_db" {
   name                = local.sql_web_portal_db_name
   managed_instance_id = azurerm_mssql_managed_instance.managed_instance.id
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "web_portal_db_diagnostic_settings" {
