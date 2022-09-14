@@ -3,4 +3,4 @@ parameters:
   - name: webAppSolutionName
 
 variables:
-  pathToWebAppProjectDirectory: $(System.DefaultWorkingDirectory)/${{ parameters.webAppSolutionName }}/${{ parameters.webAppProjectName }}
+  pathToWebAppProjectDirectory: $(System.DefaultWorkingDirectory)/src/${{ parameters.webAppSolutionName }}
