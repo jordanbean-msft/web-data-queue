@@ -1,5 +1,4 @@
 parameters:
- - name: artifactName
  - name: configuration
  - name: pathToWebAppProjectDirectory
  - name: webAppProjectName
@@ -9,17 +8,12 @@ steps:
   - task: VSBuild@1
     inputs:
       solution: '**\*.sln'
-      vsVersion: '16.0'
+      vsVersion: '17.0'
       configuration: Release
       restoreNugetPackages: true
       msbuildArchitecture: 'x86'
       logProjectEvents: true
       logFileVerbosity: 'normal'
-  - task: CopyFiles@2
-    inputs:
-      sourceFolder: ${{ parameters.pathToWebAppProjectDirectory }}/bin
-      contents: '**' 
-      targetFolder: $(Build.ArtifactStagingDirectory)
   - task: ArchiveFiles@2
     inputs:
       rootFolderOrFile: ${{ parameters.pathToWebAppProjectDirectory }}/bin
