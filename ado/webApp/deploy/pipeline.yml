@@ -1,0 +1,23 @@
+name: Deploy WebApp 
+variables:
+  - template: ../../env/global.yml
+  - template: ../../env/dev.yml
+trigger:
+  - main
+stages:
+  - stage: Dev
+    dependsOn: Build
+    jobs:
+    - deployment: Dev_Deploy
+      pool:
+        vmImage: 'windows-latest'
+      environment: ${{ variables.devEnvironmentName }}
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - template: deploy.yml
+              parameters:
+                artifactName: ${{ variables.artifactName }}
+                serviceConnectionName: ${{ variables.serviceConnectionName }}
+                appServiceName: ${{ variables.appServiceName }}
