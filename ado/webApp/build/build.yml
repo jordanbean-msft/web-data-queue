@@ -9,10 +9,10 @@ steps:
   - task: NuGetToolInstaller@0
   - task: NuGetCommand@2
     inputs:
-      restoreSolution: **\*.sln'
+      restoreSolution: '**\*.sln'
   - task: VSBuild@1
     inputs:
-      solution: **\*.sln'
+      solution: '**\*.sln'
       msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(Build.ArtifactStagingDirectory)"'
       platform: x86
       configuration: Release
