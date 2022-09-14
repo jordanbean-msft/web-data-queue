@@ -22,6 +22,9 @@ variable "sql_password_secret_value" {
 variable "admin_upn" {
   sensitive = true
 }
+variable "pipeline_spn_object_id" {
+
+}
 variable "app_service_plan_sku" {}
 variable "vpn_gateway_client_configuration_address_space" {}
 variable "api_management_sku" {}

@@ -21,6 +21,9 @@ variable "sql_password_secret_value" {
 variable "admin_upn" {
   sensitive = true
 }
+variable "pipeline_spn_object_id" {
+
+}
 
 locals {
   log_analytics_workspace_name  = "la-${var.app}-${var.region}-${var.environment}"

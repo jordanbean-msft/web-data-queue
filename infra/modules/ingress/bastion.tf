@@ -16,4 +16,10 @@ resource "azurerm_bastion_host" "bastion" {
     subnet_id            = data.azurerm_subnet.vnet_bastion_subnet.id
     public_ip_address_id = azurerm_public_ip.bastion_public_ip.id
   }
+
+  lifecycle {
+    ignore_changes = [
+      ip_configuration[0].subnet_id,
+    ]
+  }
 }

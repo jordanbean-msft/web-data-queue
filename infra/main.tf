@@ -33,6 +33,7 @@ module "services" {
   admin_upn                      = var.admin_upn
   sql_username_secret_value      = var.sql_username_secret_value
   sql_password_secret_value      = var.sql_password_secret_value
+  pipeline_spn_object_id         = var.pipeline_spn_object_id
 }
 
 module "network" {
