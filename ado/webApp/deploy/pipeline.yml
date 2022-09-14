@@ -22,6 +22,6 @@ stages:
             - template: deploy.yml
               parameters:
                 artifactName: ${{ variables.artifactName }}
-                devServiceConnectionName: ${{ variables.devServiceConnectionName }}
+                serviceConnectionName: ${{ variables.devServiceConnectionName }}
                 appServiceName: ${{ variables.devAppServiceName }}
                 webAppBuildPipelineLabel: ${{ variables.webAppBuildPipelineLabel }}

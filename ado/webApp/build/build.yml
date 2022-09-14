@@ -6,20 +6,15 @@ parameters:
 
 steps:
   - template: ../../printEnv.yml
+  - task: NuGetToolInstaller@0
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: **\*.sln'
   - task: VSBuild@1
     inputs:
-      solution: '**\*.sln'
-      vsVersion: '17.0'
+      solution: **\*.sln'
+      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(Build.ArtifactStagingDirectory)"'
+      platform: x86
       configuration: Release
-      restoreNugetPackages: true
-      msbuildArchitecture: 'x86'
-      logProjectEvents: true
-      logFileVerbosity: 'normal'
-  - task: ArchiveFiles@2
-    inputs:
-      rootFolderOrFile: ${{ parameters.pathToWebAppProjectDirectory }}/bin
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-      includeRootFolder: false
-      verbose: true
   - publish: $(Build.ArtifactStagingDirectory)
     artifact: ${{ parameters.artifactName }}

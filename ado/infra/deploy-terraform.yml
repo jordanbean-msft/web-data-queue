@@ -4,7 +4,7 @@ parameters:
   - name: pathToTerraformEnvironmentVariablesDirectory
   - name: devBackendAzureRmResourceGroupName
   - name: devBackendAzureRmStorageAccountName
-  - name: devServiceConnectionName
+  - name: serviceConnectionName
   - name: devBackendAzureRmContainerName
   - name: devBackendAzureRmKey
   
@@ -21,7 +21,7 @@ steps:
     inputs:
       command: init
       backendType: azurerm
-      backendServiceArm: ${{ parameters.devServiceConnectionName }} 
+      backendServiceArm: ${{ parameters.serviceConnectionName }} 
       devBackendAzureRmResourceGroupName: ${{ parameters.devBackendAzureRmResourceGroupName }}
       devBackendAzureRmStorageAccountName: ${{ parameters.devBackendAzureRmStorageAccountName}}
       devBackendAzureRmContainerName: ${{ parameters.devBackendAzureRmContainerName }}
@@ -31,13 +31,13 @@ steps:
     displayName: 'terraform validate'
     inputs:
       command: validate
-      environmentServiceName: ${{ parameters.devServiceConnectionName }}
+      environmentServiceName: ${{ parameters.serviceConnectionName }}
       workingDirectory: ${{ parameters.pathToInfrastructureDirectory }}
   - task: TerraformCLI@0
     displayName: 'terraform plan'
     inputs:
       command: plan
-      environmentServiceName: ${{ parameters.devServiceConnectionName }}
+      environmentServiceName: ${{ parameters.serviceConnectionName }}
       publishPlanResults: 'my_plan_name'
       commandOptions: '-out=terraform.tfplan -detailed-exitcode -var-file=${{ parameters.pathToTerraformEnvironmentVariablesDirectory }}/${{ parameters.environmentName }}.tfvars -var="vm_queue_username_secret_value=$(vm_queue_username_secret_value)" -var="vm_queue_password_secret_value=$(vm_queue_password_secret_value)" -var="sql_username_secret_value=$(sql_username_secret_value)" -var="sql_password_secret_value=$(sql_password_secret_value)"' 
       workingDirectory: ${{ parameters.pathToInfrastructureDirectory }}
@@ -46,6 +46,6 @@ steps:
     condition: and(succeeded(), eq(variables['TERRAFORM_PLAN_HAS_CHANGES'], 'true'))
     inputs:
       command: apply
-      environmentServiceName: ${{ parameters.devServiceConnectionName }}
+      environmentServiceName: ${{ parameters.serviceConnectionName }}
       commandOptions: 'terraform.tfplan' 
       workingDirectory: ${{ parameters.pathToInfrastructureDirectory }}
