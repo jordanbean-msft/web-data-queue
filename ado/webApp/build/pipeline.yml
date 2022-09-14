@@ -13,7 +13,7 @@ stages:
     jobs:
       - job: Build
         pool:
-          name: ${{ variables.adoAgentPoolName }}
+          vmImage: 'windows-latest'
         steps:
           - template: build.yml
             parameters:
